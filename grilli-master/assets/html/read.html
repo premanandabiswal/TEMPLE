@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Echoes: Wisdom of the Mahabharata</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Noto+Serif+Devanagari:wght@400;700&display=swap');
+
+        :root {
+            --bg-deep: #050505;
+            --bg-card: #0f0f12;
+            --accent-gold: #d4af37;
+            --accent-blue: #3b82f6;
+            --accent-saffron: #f97316;
+            --text-main: #e4e4e7;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .cinzel { font-family: 'Cinzel', serif; }
+        .devanagari { font-family: 'Noto Serif Devanagari', serif; }
+
+        /* Metallic Gradient Text */
+        .gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .saffron-glow {
+            text-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+        }
+
+        .quote-card {
+            background: var(--bg-card);
+            border: 1px solid #1f1f23;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .quote-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .quote-card:hover::before {
+            opacity: 1;
+        }
+
+        .separator {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, #f97316, transparent);
+        }
+
+        .bg-mesh {
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(210,100%,10%,0.5) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(30,100%,10%,0.5) 0, transparent 50%);
+        }
+
+        /* Animated border pulse */
+        @keyframes pulse-border {
+            0% { border-color: #27272a; }
+            50% { border-color: #d4af37; }
+            100% { border-color: #27272a; }
+        }
+
+        .pulse-accent {
+            animation: pulse-border 4s infinite;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+    </style>
+</head>
+<body class="selection:bg-orange-900/50 selection:text-white bg-mesh">
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-40">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-900/10 via-black to-black"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-6">
+            <h2 class="cinzel text-orange-500/70 tracking-[0.4em] text-sm md:text-lg mb-4 uppercase saffron-glow">The Eternal Song</h2>
+            <h1 class="cinzel text-6xl md:text-9xl font-bold mb-6 gold-gradient drop-shadow-2xl">MAHABHARATA</h1>
+            <div class="separator w-64 mx-auto mb-8 opacity-60"></div>
+            <p class="max-w-2xl mx-auto text-zinc-400 text-lg md:text-xl italic font-light leading-relaxed">
+                "What is found here, may be found elsewhere. <br>
+                <span class="text-zinc-500">What is not found here, will not be found anywhere."</span>
+            </p>
+            
+            <a href="#verses" class="mt-16 inline-flex items-center gap-3 px-10 py-4 border border-orange-900/50 hover:border-orange-500 transition-all duration-500 cinzel tracking-[0.2em] text-sm group">
+                <span class="group-hover:text-orange-400">Enter the Kurukshetra</span>
+                <svg class="w-4 h-4 text-orange-800 group-hover:text-orange-500 transition-colors" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V5z" clip-rule="evenodd"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <main id="verses" class="max-w-5xl mx-auto px-6 py-24">
+        
+        <!-- Category: Dharma & Duty -->
+        <div class="mb-32">
+            <div class="flex items-center gap-6 mb-16">
+                <div class="h-[1px] flex-grow bg-gradient-to-r from-transparent to-orange-900/50"></div>
+                <h3 class="cinzel text-3xl text-orange-500/80 tracking-widest font-bold">DHARMA</h3>
+                <div class="h-[1px] flex-grow bg-gradient-to-l from-transparent to-orange-900/50"></div>
+            </div>
+
+            <div class="grid gap-12">
+                <!-- Verse 1 -->
+                <div class="quote-card p-10 md:p-14 rounded-xl group bg-gradient-to-br from-[#0f0f12] to-[#050505]">
+                    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <svg class="w-32 h-32 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+                    </div>
+                    
+                    <p class="devanagari text-3xl md:text-4xl mb-8 leading-relaxed bg-gradient-to-r from-orange-200 to-orange-500 bg-clip-text text-transparent">
+                        कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।<br>
+                        मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥
+                    </p>
+                    <p class="text-zinc-300 text-lg md:text-xl italic mb-6 leading-relaxed border-l-2 border-orange-500/30 pl-6">
+                        "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <span class="h-[1px] w-8 bg-orange-900"></span>
+                        <div class="text-xs cinzel text-orange-700 uppercase tracking-widest">Bhagavad Gita 2.47</div>
+                    </div>
+                </div>
+
+                <!-- Verse 2 -->
+                <div class="quote-card p-10 rounded-xl bg-zinc-900/20">
+                    <p class="devanagari text-2xl text-blue-400 mb-6 italic">
+                        "Dharma eva hato hanti, dharmo rakshati rakshitah."
+                    </p>
+                    <p class="text-zinc-400 leading-relaxed text-lg">
+                        "Justice, being violated, destroys; justice, being preserved, preserves. Therefore justice must not be violated."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: The Soul -->
+        <div class="mb-32">
+            <div class="flex items-center gap-6 mb-16">
+                <div class="h-[1px] flex-grow bg-gradient-to-r from-transparent to-blue-900/50"></div>
+                <h3 class="cinzel text-3xl text-blue-400 tracking-widest font-bold">THE ATMAN</h3>
+                <div class="h-[1px] flex-grow bg-gradient-to-l from-transparent to-blue-900/50"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="quote-card p-10 rounded-xl border-t-2 border-blue-900/30 hover:border-blue-500/50">
+                    <div class="text-blue-500/40 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <p class="text-zinc-200 text-lg leading-relaxed mb-6">
+                        "Weapon cannot cleave it, nor any fire burn, nor do the waters wet it, nor can the wind dry it."
+                    </p>
+                    <div class="text-[10px] cinzel text-zinc-600 tracking-widest">Gita 2.23</div>
+                </div>
+                <div class="quote-card p-10 rounded-xl border-t-2 border-zinc-800 hover:border-orange-500/50">
+                    <div class="text-orange-500/40 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    </div>
+                    <p class="text-zinc-200 text-lg leading-relaxed mb-6">
+                        "As a man casts off worn-out garments and puts on others that are new, so does the embodied soul cast off worn-out bodies."
+                    </p>
+                    <div class="text-[10px] cinzel text-zinc-600 tracking-widest">Gita 2.22</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Wisdom & Time -->
+        <div class="mb-32">
+            <div class="flex items-center gap-6 mb-16">
+                <div class="h-[1px] flex-grow bg-zinc-900"></div>
+                <h3 class="cinzel text-3xl text-zinc-400 tracking-widest">KĀLA</h3>
+                <div class="h-[1px] flex-grow bg-zinc-900"></div>
+            </div>
+
+            <div class="quote-card p-12 md:p-20 text-center rounded-2xl relative">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1e1b4b_0%,_transparent_70%)] opacity-20"></div>
+                <p class="devanagari text-4xl md:text-6xl text-zinc-100 mb-10 saffron-glow leading-normal">
+                    कालोऽस्मि लोकक्षयकृत्प्रवृद्धो...
+                </p>
+                <p class="text-2xl text-zinc-400 max-w-2xl mx-auto italic font-light leading-relaxed mb-10">
+                    "I am <span class="text-orange-500 font-semibold">Time</span>, the great destroyer of worlds, and I have come here to destroy all people."
+                </p>
+                <div class="flex justify-center gap-2">
+                   <div class="w-2 h-2 rounded-full bg-orange-600 shadow-[0_0_10px_#ea580c]"></div>
+                   <div class="w-2 h-2 rounded-full bg-zinc-800"></div>
+                   <div class="w-2 h-2 rounded-full bg-zinc-800"></div>
+                </div>
+                <div class="mt-8 text-xs cinzel text-zinc-600 tracking-[0.5em]">VISHWAROOPA FORM</div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900/50 py-24 bg-black relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-30"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <div class="cinzel text-orange-900 tracking-[0.6em] text-sm mb-8">ITI MAHĀBHĀRATE</div>
+            <div class="text-zinc-500 text-lg italic font-light leading-relaxed">
+                "Wherever there is <span class="text-blue-500/60">Krishna</span>, the Lord of all Mystics, and wherever there is <span class="text-orange-500/60">Arjuna</span>, the supreme archer, there will also certainly be victory."
+            </div>
+            
+            <div class="mt-16 flex justify-center items-center gap-6">
+                <div class="h-[1px] w-12 bg-zinc-900"></div>
+                <div class="cinzel text-[10px] text-zinc-700 tracking-[1em]">OM SHANTI</div>
+                <div class="h-[1px] w-12 bg-zinc-900"></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = { threshold: 0.15 };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.quote-card').forEach((card, index) => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(40px)";
+            card.style.transition = `all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) ${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

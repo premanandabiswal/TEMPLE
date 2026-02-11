@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-labelledby="titleMara">
+  <title id="titleMara">Mara avatar</title>
+  <rect width="120" height="120" rx="16" fill="#cfe8ff" />
+  <circle cx="60" cy="38" r="26" fill="#9fd4ff" />
+  <rect x="18" y="72" width="84" height="24" rx="8" fill="#7ec1ff" />
+  <text x="60" y="82" font-family="Helvetica, Arial, sans-serif" font-size="28" text-anchor="middle" fill="#14384f">M</text>
+</svg>

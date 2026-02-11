@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-labelledby="titleKofi">
+  <title id="titleKofi">Kofi avatar</title>
+  <rect width="120" height="120" rx="16" fill="#e0ffd8" />
+  <circle cx="60" cy="38" r="26" fill="#b8f0a6" />
+  <rect x="18" y="72" width="84" height="24" rx="8" fill="#8fe07a" />
+  <text x="60" y="82" font-family="Helvetica, Arial, sans-serif" font-size="28" text-anchor="middle" fill="#11421b">K</text>
+</svg>

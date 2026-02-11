@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Ananda Nilayam | Community Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --bg-color: #120f0d;
+            --card-color: #1c1815;
+            --accent-color: #c68e5d;
+            --accent-hover: #b57d4c;
+            --text-primary: #f5e6d3;
+            --text-secondary: #a89078;
+            --border-color: #2d2621;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+
+        .animate-ping-once {
+            animation: ping 0.5s cubic-bezier(0, 0, 0.2, 1) 1;
+        }
+
+        @keyframes ping {
+            75%, 100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .tab-active {
+            background-color: var(--accent-color);
+            color: #120f0d;
+        }
+    </style>
+</head>
+<body class="pb-20 md:pb-10 custom-scrollbar">
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex sticky top-0 z-50 px-8 py-3 items-center justify-between border-b border-[#2d2621]" style="background-color: var(--card-color);">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-[#120f0d] font-black italic" style="background-color: var(--accent-color);">A</div>
+            <span class="font-bold text-xl tracking-tight">Ananda Portal</span>
+        </div>
+        
+        <div class="flex-1 max-w-md mx-8">
+            <div class="relative">
+                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style="color: var(--text-secondary);"></i>
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="Search rituals or festivals..." 
+                    class="w-full bg-[#120f0d] border border-[#2d2621] rounded-full py-2 pl-10 pr-4 focus:ring-1 focus:ring-[#c68e5d] outline-none text-sm text-[#f5e6d3]"
+                >
+            </div>
+        </div>
+
+        <div class="flex items-center gap-8">
+            <i data-lucide="home" class="w-5 h-5 cursor-pointer hover:text-[#c68e5d] transition-colors"></i>
+            <i data-lucide="calendar" class="w-5 h-5 cursor-pointer hover:text-[#c68e5d] transition-colors"></i>
+            <div class="relative">
+                <i data-lucide="bell" class="w-5 h-5 cursor-pointer hover:text-[#c68e5d] transition-colors"></i>
+                <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            </div>
+            <i data-lucide="user" class="w-5 h-5 cursor-pointer hover:text-[#c68e5d] transition-colors"></i>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto md:pt-6 px-0 md:px-4">
+        <!-- Profile Header -->
+        <div class="rounded-b-[2rem] md:rounded-[2rem] shadow-2xl overflow-hidden border border-[#2d2621] mb-8" style="background-color: var(--card-color);">
+            <div class="h-40 md:h-64 relative">
+                <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&q=80&w=1200" alt="Banner" class="w-full h-full object-cover opacity-60">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1c1815] to-transparent"></div>
+                <div class="absolute top-4 right-4 bg-red-600/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-2 text-xs font-bold animate-pulse">
+                    <i data-lucide="play" class="w-3 h-3 fill-white"></i> LIVE AARTI
+                </div>
+            </div>
+            
+            <div class="px-6 md:px-10 pb-8 relative">
+                <div class="flex justify-between items-end -mt-16 md:-mt-20 mb-6">
+                    <div class="relative">
+                        <div class="w-28 h-28 md:w-36 md:h-36 rounded-3xl border-4 border-[#1c1815] overflow-hidden bg-white shadow-2xl rotate-3">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150" alt="Temple Logo" class="w-full h-full object-cover -rotate-3">
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="text-[#120f0d] px-8 py-2.5 rounded-2xl font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-[#c68e5d22]" style="background-color: var(--accent-color);">
+                            Follow
+                        </button>
+                        <button onclick="toggleModal('donationModal', true)" class="bg-[#2d2621] hover:bg-[#3d342d] px-6 py-2.5 rounded-2xl font-bold transition-all flex items-center gap-2 border border-[#2d2621]">
+                            <i data-lucide="gift" class="w-4 h-4"></i> Seva
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="md:col-span-2">
+                        <h1 class="text-3xl md:text-4xl font-black mb-2 tracking-tight">
+                            Sri Ananda Nilayam <i data-lucide="check-circle-2" class="inline w-6 h-6 text-blue-400"></i>
+                        </h1>
+                        <p class="flex items-center gap-2 text-sm font-medium mb-4" style="color: var(--text-secondary);">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-[#c68e5d]"></i> Varanasi, India
+                        </p>
+                        <p class="leading-relaxed text-sm md:text-base max-w-xl italic" style="color: var(--text-secondary);">
+                            "A sanctuary of peace and ancient traditions. Dedicated to spiritual growth and community service through daily rituals and grand festivals."
+                        </p>
+                    </div>
+                    <div class="flex justify-around items-center bg-[#120f0d]/50 rounded-2xl p-4 border border-[#2d2621]">
+                        <div class="text-center">
+                            <div class="text-xl font-black" id="followerCount">42.5K</div>
+                            <div class="text-[10px] uppercase tracking-widest" style="color: var(--text-secondary);">Devotees</div>
+                        </div>
+                        <div class="w-px h-8 bg-[#2d2621]"></div>
+                        <div class="text-center">
+                            <div class="text-xl font-black" id="postCount">3</div>
+                            <div class="text-[10px] uppercase tracking-widest" style="color: var(--text-secondary);">Posts</div>
+                        </div>
+                        <div class="w-px h-8 bg-[#2d2621]"></div>
+                        <div class="text-center">
+                            <div class="text-xl font-black">12</div>
+                            <div class="text-[10px] uppercase tracking-widest" style="color: var(--text-secondary);">Festivals</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 px-4 md:px-0">
+            <!-- Feed Column -->
+            <div class="md:col-span-8 space-y-6">
+                <!-- Create Post Box -->
+                <div class="p-4 rounded-2xl border border-[#2d2621] flex items-center gap-4" style="background-color: var(--card-color);">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150" class="w-10 h-10 rounded-full object-cover" alt="User">
+                    <button onclick="toggleModal('createPostModal', true)" class="flex-1 text-left px-5 py-3 rounded-xl bg-[#120f0d] border border-[#2d2621] transition-colors" style="color: var(--text-secondary);">
+                        Share your divine experience...
+                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="toggleModal('createPostModal', true)" class="p-3 bg-[#2d2621] rounded-xl hover:text-[#c68e5d]"><i data-lucide="camera" class="w-5 h-5"></i></button>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex gap-2 p-1.5 rounded-2xl border border-[#2d2621]" style="background-color: var(--card-color);">
+                    <button onclick="switchTab('feed')" id="tab-feed" class="tab-active flex-1 py-3 rounded-xl font-bold text-sm transition-all capitalize">Feed</button>
+                    <button onclick="switchTab('gallery')" id="tab-gallery" class="flex-1 py-3 rounded-xl font-bold text-sm transition-all capitalize text-[#a89078] hover:bg-[#120f0d]">Gallery</button>
+                    <button onclick="switchTab('rituals')" id="tab-rituals" class="flex-1 py-3 rounded-xl font-bold text-sm transition-all capitalize text-[#a89078] hover:bg-[#120f0d]">Rituals</button>
+                </div>
+
+                <!-- Content Area -->
+                <div id="tabContent" class="space-y-6">
+                    <!-- Dynamic content injected here -->
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="hidden md:block md:col-span-4 space-y-6">
+                <div class="bg-gradient-to-br from-[#c68e5d] to-[#8d623d] p-6 rounded-3xl text-[#120f0d] shadow-2xl relative overflow-hidden group">
+                    <div class="relative z-10">
+                        <span class="bg-[#120f0d] text-white text-[10px] px-2 py-0.5 rounded-full font-bold mb-3 inline-block">LIVE NOW</span>
+                        <h3 class="text-2xl font-black mb-1 leading-tight">Evening Ganga Aarti</h3>
+                        <p class="text-xs font-bold opacity-80 mb-6 italic">Join 4.2k others in digital prayer</p>
+                        <button class="bg-[#120f0d] text-white w-full py-3 rounded-2xl font-bold flex items-center justify-center gap-2 group-hover:scale-[1.02] transition-transform">
+                            <i data-lucide="play" class="w-4 h-4 fill-current"></i> Watch Stream
+                        </button>
+                    </div>
+                    <i data-lucide="bell" class="absolute top-0 right-0 p-4 opacity-10 transform rotate-12 scale-150 w-32 h-32"></i>
+                </div>
+
+                <div class="rounded-3xl border border-[#2d2621] p-6" style="background-color: var(--card-color);">
+                    <h3 class="font-black text-lg mb-6 flex items-center justify-between">
+                        Festivals <span class="text-[10px] text-[#c68e5d] cursor-pointer">View All</span>
+                    </h3>
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-4 group cursor-pointer">
+                            <div class="w-12 h-12 bg-[#120f0d] rounded-2xl flex items-center justify-center text-2xl border border-[#2d2621] group-hover:border-[#c68e5d] transition-all">🌙</div>
+                            <div>
+                                <h4 class="font-bold text-sm">Maha Shivaratri</h4>
+                                <p class="text-[10px] font-bold" style="color: var(--text-secondary);">12 Days Left</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group cursor-pointer">
+                            <div class="w-12 h-12 bg-[#120f0d] rounded-2xl flex items-center justify-center text-2xl border border-[#2d2621] group-hover:border-[#c68e5d] transition-all">🎨</div>
+                            <div>
+                                <h4 class="font-bold text-sm">Holi Mahotsav</h4>
+                                <p class="text-[10px] font-bold" style="color: var(--text-secondary);">28 Days Left</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Nav -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 border-t border-[#2d2621] px-8 py-4 flex justify-between items-center z-50 rounded-t-3xl shadow-2xl" style="background-color: var(--card-color);">
+        <i data-lucide="home" onclick="switchTab('feed')" class="w-6 h-6 text-[#c68e5d]"></i>
+        <i data-lucide="calendar" onclick="switchTab('rituals')" class="w-6 h-6 text-[#a89078]"></i>
+        <div class="p-3 rounded-2xl -mt-10 shadow-lg border-4 border-[#120f0d]" style="background-color: var(--accent-color);" onclick="toggleModal('createPostModal', true)">
+            <i data-lucide="plus-square" class="w-6 h-6 text-[#120f0d]"></i>
+        </div>
+        <i data-lucide="camera" onclick="switchTab('gallery')" class="w-6 h-6 text-[#a89078]"></i>
+        <i data-lucide="user" class="w-6 h-6 text-[#a89078]"></i>
+    </nav>
+
+    <!-- Create Post Modal -->
+    <div id="createPostModal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4 modal-backdrop">
+        <div class="w-full max-w-lg rounded-3xl border border-[#2d2621] overflow-hidden" style="background-color: var(--card-color);">
+            <div class="p-6 border-b border-[#2d2621] flex justify-between items-center">
+                <h3 class="font-black text-lg">Share Divine Moment</h3>
+                <i data-lucide="x" class="cursor-pointer" onclick="toggleModal('createPostModal', false)"></i>
+            </div>
+            <div class="p-6 space-y-4">
+                <textarea id="newPostText" placeholder="What did you experience at the temple today?" class="w-full bg-transparent border-none outline-none resize-none text-lg h-32 text-[#f5e6d3] placeholder-[#a89078]/50"></textarea>
+            </div>
+            <div class="p-4 bg-[#120f0d]">
+                <button onclick="addPost()" class="w-full py-3 rounded-2xl font-black text-[#120f0d]" style="background-color: var(--accent-color);">Post to Feed</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donation Modal -->
+    <div id="donationModal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4 modal-backdrop">
+        <div class="w-full max-w-md rounded-[2.5rem] border border-[#2d2621] p-8 relative" style="background-color: var(--card-color);">
+            <button onclick="toggleModal('donationModal', false)" class="absolute top-6 right-6 p-2 rounded-full hover:bg-[#120f0d]">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-4 text-[#120f0d]" style="background-color: var(--accent-color);">
+                    <i data-lucide="gift" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-2">Temple Seva</h3>
+                <p class="text-sm text-[#a89078]">Your contribution supports our daily free kitchen and temple maintenance.</p>
+            </div>
+            <button class="w-full py-4 rounded-2xl font-black text-[#120f0d] flex items-center justify-center gap-2 mb-4" style="background-color: var(--accent-color);">
+                Confirm Contribution <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data Store
+        let posts = [
+            {
+                id: 1,
+                author: 'Sri Ananda Nilayam',
+                time: '2 hours ago',
+                content: 'The morning Maha Aarti was filled with divine energy today. Grateful to all the devotees who joined us in prayer for world peace.',
+                image: 'https://images.unsplash.com/photo-1561323577-5b76286cb254?auto=format&fit=crop&q=80&w=800',
+                likes: 1200,
+                comments: 45,
+                liked: false
+            },
+            {
+                id: 2,
+                author: 'Sri Ananda Nilayam',
+                time: '1 day ago',
+                content: 'Glimpses from the grand Deepotsav festival. 10,000 lamps were lit to celebrate the triumph of light over darkness. ✨',
+                image: 'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&q=80&w=800',
+                likes: 3800,
+                comments: 112,
+                liked: false
+            }
+        ];
+
+        let activeTab = 'feed';
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Render Functions
+        function renderFeed(filter = '') {
+            const container = document.getElementById('tabContent');
+            const filteredPosts = posts.filter(p => p.content.toLowerCase().includes(filter.toLowerCase()));
+            
+            if (filteredPosts.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-20 rounded-3xl border border-dashed border-[#2d2621]">
+                        <p class="text-[#a89078]">No posts found matching your search.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = filteredPosts.map(post => `
+                <div class="rounded-3xl border border-[#2d2621] overflow-hidden shadow-lg" style="background-color: var(--card-color);">
+                    <div class="p-5 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150" class="w-11 h-11 rounded-xl object-cover border border-[#2d2621]" />
+                            <div>
+                                <h3 class="font-bold text-sm tracking-tight">${post.author}</h3>
+                                <p class="text-[10px] text-[#a89078] flex items-center gap-1 uppercase tracking-widest">
+                                    <i data-lucide="clock" class="w-3 h-3"></i> ${post.time}
+                                </p>
+                            </div>
+                        </div>
+                        <i data-lucide="more-horizontal" class="text-[#a89078] cursor-pointer hover:text-white"></i>
+                    </div>
+                    <div class="px-5 pb-4">
+                        <p class="text-[15px] leading-relaxed opacity-90">${post.content}</p>
+                    </div>
+                    <div class="w-full bg-[#120f0d]">
+                        <img src="${post.image}" class="w-full object-cover max-h-[500px]" />
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex gap-6">
+                                <button onclick="toggleLike(${post.id})" class="flex items-center gap-2 transition-all ${post.liked ? 'text-red-500' : 'text-[#a89078]'}">
+                                    <i data-lucide="heart" class="w-6 h-6 ${post.liked ? 'fill-current' : ''}"></i>
+                                    <span class="text-sm font-bold">${post.likes + (post.liked ? 1 : 0)}</span>
+                                </button>
+                                <button class="flex items-center gap-2 text-[#a89078] hover:text-white">
+                                    <i data-lucide="message-circle" class="w-6 h-6"></i>
+                                    <span class="text-sm font-bold">${post.comments}</span>
+                                </button>
+                            </div>
+                            <i data-lucide="share-2" class="text-[#a89078] w-5 h-5 cursor-pointer"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function renderGallery() {
+            const container = document.getElementById('tabContent');
+            container.innerHTML = `
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    ${[...Array(6)].map((_, i) => `
+                        <div class="aspect-square rounded-2xl overflow-hidden bg-[#120f0d] border border-[#2d2621]">
+                            <img src="https://images.unsplash.com/photo-${1580000000000 + (i * 10000)}?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" />
+                        </div>
+                    `).join('')}
+                </div>`;
+        }
+
+        function renderRituals() {
+            const container = document.getElementById('tabContent');
+            const schedules = [
+                { time: '04:30 AM', title: 'Mangala Aarti' },
+                { time: '12:00 PM', title: 'Rajbhog Seva' },
+                { time: '06:30 PM', title: 'Sandhya Aarti' }
+            ];
+            container.innerHTML = `
+                <div class="p-8 rounded-3xl border border-[#2d2621]" style="background-color: var(--card-color);">
+                    <h2 class="text-2xl font-black mb-8 border-b border-[#2d2621] pb-4">Sacred Timings</h2>
+                    <div class="space-y-6">
+                        ${schedules.map(r => `
+                            <div class="flex justify-between items-center p-4 bg-[#120f0d] rounded-2xl border border-[#2d2621]">
+                                <div class="flex gap-5 items-center">
+                                    <div class="text-[#c68e5d] font-black text-lg">${r.time}</div>
+                                    <div class="font-bold">${r.title}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>`;
+        }
+
+        // Logic Handlers
+        function switchTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('[id^="tab-"]').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('text-[#a89078]', 'hover:bg-[#120f0d]');
+            });
+            const activeBtn = document.getElementById('tab-' + tab);
+            activeBtn.classList.add('tab-active');
+            activeBtn.classList.remove('text-[#a89078]', 'hover:bg-[#120f0d]');
+
+            if (tab === 'feed') renderFeed();
+            if (tab === 'gallery') renderGallery();
+            if (tab === 'rituals') renderRituals();
+        }
+
+        function toggleLike(id) {
+            const post = posts.find(p => p.id === id);
+            if (post) post.liked = !post.liked;
+            renderFeed(document.getElementById('searchInput').value);
+        }
+
+        function toggleModal(id, show) {
+            const modal = document.getElementById(id);
+            modal.classList.toggle('hidden', !show);
+            modal.classList.toggle('flex', show);
+        }
+
+        function addPost() {
+            const text = document.getElementById('newPostText').value;
+            if (!text.trim()) return;
+
+            const newPost = {
+                id: Date.now(),
+                author: 'Devotee Guest',
+                time: 'Just now',
+                content: text,
+                image: 'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=80&w=800',
+                likes: 0,
+                comments: 0,
+                liked: false
+            };
+
+            posts = [newPost, ...posts];
+            document.getElementById('newPostText').value = '';
+            document.getElementById('postCount').innerText = posts.length;
+            toggleModal('createPostModal', false);
+            switchTab('feed');
+        }
+
+        // Search Listener
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            if (activeTab === 'feed') renderFeed(e.target.value);
+        });
+
+        // Initial Load
+        renderFeed();
+    </script>
+</body>
+</html>

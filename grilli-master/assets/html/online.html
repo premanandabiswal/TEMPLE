@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Divine Sanctuary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Fauna+One&display=swap');
+
+        :root {
+            --bg-deep: #1a0b2e;
+            --saffron: #f97316;
+            --marigold: #fbbf24;
+            --rose: #fb7185;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: #fffaf0;
+            font-family: 'Fauna One', serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(249, 115, 22, 0.3);
+            border-radius: 10px;
+        }
+
+        /* Animations */
+        @keyframes flicker {
+            0%, 100% { transform: scaleY(1) rotate(-1deg); opacity: 0.95; }
+            50% { transform: scaleY(1.2) rotate(1deg); opacity: 1; filter: brightness(1.3); }
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-200px) rotate(180deg); opacity: 0; }
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+        }
+
+        .animate-flicker { animation: flicker 0.15s infinite; }
+        .animate-float { animation: float-up 4s ease-out forwards; }
+        .animate-spin-slow { animation: spin-slow 80s linear infinite; }
+        .animate-fade-in { animation: fade-in 1s ease-out forwards; }
+        .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+
+        .ritual-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .ritual-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: flex;
+            animation: fade-in 0.8s ease-out;
+        }
+
+        .glass {
+            background: rgba(26, 11, 46, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(249, 115, 22, 0.1);
+        }
+
+        .darshan-img-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 11, 46, 0.8), transparent, rgba(26, 11, 46, 0.4));
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-600/20 rounded-full blur-[120px] animate-pulse-glow"></div>
+        <div class="absolute top-[10%] left-[10%] w-[400px] h-[400px] bg-rose-600/10 rounded-full blur-[100px]"></div>
+        
+        <div class="absolute inset-0 opacity-5 flex items-center justify-center animate-spin-slow">
+            <svg viewBox="0 0 200 200" class="w-[80%] h-[80%] text-orange-400">
+                <path fill="currentColor" d="M100 0 A100 100 0 1 0 100 200 A100 100 0 1 0 100 0 M100 20 A80 80 0 1 1 100 180 A80 80 0 1 1 100 20" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-10 px-8 py-6 flex flex-col md:flex-row justify-between items-center border-b border-orange-500/20 glass">
+        <div class="flex items-center gap-4 mb-4 md:mb-0">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-orange-500 to-rose-600 flex items-center justify-center shadow-lg border border-orange-400/30">
+                <i data-lucide="sun" class="text-white w-7 h-7 animate-pulse"></i>
+            </div>
+            <div>
+                <h1 class="text-2xl font-light tracking-[0.2em] text-orange-100 uppercase">Divine Sanctuary</h1>
+                <p class="text-[10px] tracking-[0.3em] text-orange-400 font-bold uppercase">Presence • Peace • Prayer</p>
+            </div>
+        </div>
+        <nav class="flex gap-8 text-xs font-bold uppercase tracking-widest">
+            <button id="btn-darshan" class="nav-link transition-all duration-300 relative py-2 text-orange-400">
+                Sacred Altar
+                <span class="indicator absolute bottom-0 left-0 w-full h-0.5 bg-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.8)]"></span>
+            </button>
+            <button id="btn-prayers" class="nav-link transition-all duration-300 relative py-2 text-amber-100/40 hover:text-amber-100">
+                Sankalpa
+                <span class="indicator hidden absolute bottom-0 left-0 w-full h-0.5 bg-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.8)]"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 relative z-10 overflow-y-auto overflow-x-hidden flex flex-col">
+        
+        <!-- Darshan Tab -->
+        <section id="tab-darshan" class="tab-content active flex-col items-center p-4 py-8 max-w-6xl mx-auto w-full">
+            <div class="w-full text-center mb-10">
+                <span class="inline-block px-4 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-300 text-xs tracking-widest mb-3 uppercase font-bold">Daily Vani</span>
+                <p id="wisdom-text" class="text-xl md:text-2xl font-light italic text-orange-50 leading-relaxed max-w-2xl mx-auto">
+                    "Let your heart be a lamp of divine light."
+                </p>
+            </div>
+
+            <div class="relative w-full max-w-4xl">
+                <div class="absolute inset-0 bg-gradient-to-t from-orange-950/60 via-purple-950/20 to-transparent rounded-[3rem] border border-orange-500/20 shadow-2xl"></div>
+                
+                <div class="relative py-12 flex flex-col items-center justify-center min-h-[500px]">
+                    <div id="darshan-frame" class="relative w-full max-w-2xl aspect-video rounded-3xl overflow-hidden border-2 border-orange-400/30 shadow-2xl bg-black darshan-img-container">
+                        <img 
+                            id="darshan-img"
+                            src="https://images.unsplash.com/photo-1620121692029-d088224efc74?q=80&w=1200&auto=format&fit=crop" 
+                            alt="Divine Presence"
+                            class="w-full h-full object-cover transition-all duration-[2000ms] brightness-[0.6] sepia-[0.3]"
+                        />
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <button id="btn-receive-darshan" class="ritual-btn px-8 py-3 rounded-full bg-orange-500/20 hover:bg-orange-500/40 border border-orange-400/50 text-orange-100 font-bold tracking-widest text-sm backdrop-blur-md">
+                                RECEIVE DARSHAN
+                            </button>
+                        </div>
+                        <div id="flower-container" class="absolute inset-0 pointer-events-none"></div>
+                    </div>
+
+                    <div class="mt-12 flex flex-wrap gap-6 justify-center">
+                        <button onclick="addCandle()" class="ritual-btn px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 text-white font-black tracking-widest text-sm shadow-xl flex items-center gap-3">
+                            <i data-lucide="flame"></i> LIGHT DEEPAM
+                        </button>
+                        <button onclick="offerFlower()" class="ritual-btn px-8 py-4 rounded-2xl border border-rose-500/40 bg-rose-950/40 text-rose-100 font-black tracking-widest text-sm backdrop-blur-sm flex items-center gap-3">
+                            <i data-lucide="flower"></i> OFFER FLOWERS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-orange-950/20 border border-orange-500/10 rounded-[2rem] p-8 backdrop-blur-sm relative">
+                    <h3 class="text-xl font-bold text-orange-200 mb-6 flex items-center gap-3">
+                        <i data-lucide="flame" class="text-orange-500"></i> Eternal Flames
+                    </h3>
+                    <div id="candle-altar" class="relative h-40 bg-black/40 rounded-2xl overflow-hidden flex items-end justify-center px-4 border border-orange-900/20">
+                        <!-- Candles will appear here -->
+                    </div>
+                </div>
+
+                <div class="bg-purple-950/20 border border-purple-500/10 rounded-[2rem] p-8 backdrop-blur-sm flex flex-col justify-center text-center">
+                    <div class="p-4 bg-orange-500/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="bell" class="text-orange-400 w-8 h-8 animate-bounce"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-orange-100 mb-2">Temple Bells</h4>
+                    <p class="text-orange-100/60 leading-relaxed text-sm italic">Take a deep breath and let the sound of the bell clear your mind for prayer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sankalpa Tab -->
+        <section id="tab-prayers" class="tab-content flex-col max-w-5xl mx-auto w-full p-8 gap-10">
+            <div class="text-center">
+                <div class="inline-block p-4 bg-orange-500/10 rounded-full border border-orange-500/20 mb-6">
+                    <i data-lucide="scroll-text" class="w-10 h-10 text-orange-400"></i>
+                </div>
+                <h2 class="text-4xl font-light text-orange-100 mb-2">Write Your Sankalpa</h2>
+                <p class="text-orange-400/60 text-sm font-bold tracking-[0.2em] uppercase">Your heart's voice is always heard</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="flex flex-col gap-6 relative">
+                    <textarea id="prayer-input" placeholder="Pour your heart into these words..." class="w-full min-h-[300px] bg-orange-950/20 border border-orange-500/20 rounded-[2rem] p-8 text-orange-50 placeholder:text-orange-900/40 focus:outline-none focus:border-orange-500/50 transition-all resize-none shadow-xl text-lg italic leading-relaxed backdrop-blur-sm"></textarea>
+                    <button id="btn-send-prayer" class="ritual-btn py-5 bg-gradient-to-r from-orange-600 to-rose-600 text-white font-black rounded-2xl shadow-xl flex items-center justify-center gap-3 tracking-[0.2em] uppercase">
+                        <i data-lucide="send" class="w-5 h-5"></i> SEND TO THE DIVINE
+                    </button>
+                    
+                    <div id="success-overlay" class="hidden absolute inset-0 flex items-center justify-center bg-black/90 rounded-[2rem] border border-orange-500/30 z-20">
+                        <div class="text-center">
+                            <i data-lucide="sparkles" class="w-16 h-16 text-orange-400 mx-auto mb-4 animate-pulse"></i>
+                            <p class="text-2xl font-light tracking-widest text-orange-100 uppercase">Received in the Infinite</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col h-full max-h-[500px]">
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] text-orange-500/60 mb-6 flex items-center gap-2">
+                        <i data-lucide="heart" class="text-rose-500 w-4 h-4"></i> Heart's Echoes
+                    </h4>
+                    <div id="prayer-history" class="flex-1 overflow-y-auto pr-4 custom-scrollbar space-y-6">
+                        <div class="empty-history flex flex-col items-center justify-center text-center p-8 border border-dashed border-orange-500/10 rounded-[2rem] opacity-30 h-full">
+                            <i data-lucide="wind" class="w-12 h-12 mb-4 text-orange-400"></i>
+                            <p class="text-sm italic">The archive of your soul is waiting for its first entry.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 px-10 py-6 border-t border-orange-500/10 bg-black/80 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+        <p class="text-[9px] uppercase tracking-[0.4em] text-orange-900/80 font-bold italic">Sarve Bhavantu Sukhinah</p>
+        <div class="flex gap-8 opacity-40">
+            <i data-lucide="sun" class="w-3.5 h-3.5 text-orange-500"></i>
+            <i data-lucide="flower" class="w-3.5 h-3.5 text-rose-500"></i>
+            <i data-lucide="moon" class="w-3.5 h-3.5 text-indigo-400"></i>
+        </div>
+        <p class="text-[9px] uppercase tracking-[0.4em] text-orange-900/80 font-bold italic">Digital Sanctuary © 2026</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // State Management
+        const wisdoms = [
+            "Where there is love, there is the Divine.",
+            "The soul is the same in all living creatures.",
+            "Truth is one; sages call it by various names.",
+            "Your heart is the ultimate temple.",
+            "In the silence of the heart, the Divine speaks."
+        ];
+
+        // Elements
+        const btnDarshan = document.getElementById('btn-darshan');
+        const btnPrayers = document.getElementById('btn-prayers');
+        const tabDarshan = document.getElementById('tab-darshan');
+        const tabPrayers = document.getElementById('tab-prayers');
+        const wisdomEl = document.getElementById('wisdom-text');
+        const darshanImg = document.getElementById('darshan-img');
+        const btnReceiveDarshan = document.getElementById('btn-receive-darshan');
+        const candleAltar = document.getElementById('candle-altar');
+        const flowerContainer = document.getElementById('flower-container');
+        const prayerInput = document.getElementById('prayer-input');
+        const btnSendPrayer = document.getElementById('btn-send-prayer');
+        const successOverlay = document.getElementById('success-overlay');
+        const prayerHistory = document.getElementById('prayer-history');
+
+        // Tab Switching
+        function switchTab(tab) {
+            if (tab === 'darshan') {
+                tabDarshan.classList.add('active');
+                tabPrayers.classList.remove('active');
+                btnDarshan.classList.add('text-orange-400');
+                btnDarshan.classList.remove('text-amber-100/40');
+                btnPrayers.classList.remove('text-orange-400');
+                btnPrayers.classList.add('text-amber-100/40');
+                btnDarshan.querySelector('.indicator').classList.remove('hidden');
+                btnPrayers.querySelector('.indicator').classList.add('hidden');
+            } else {
+                tabPrayers.classList.add('active');
+                tabDarshan.classList.remove('active');
+                btnPrayers.classList.add('text-orange-400');
+                btnPrayers.classList.remove('text-amber-100/40');
+                btnDarshan.classList.remove('text-orange-400');
+                btnDarshan.classList.add('text-amber-100/40');
+                btnPrayers.querySelector('.indicator').classList.remove('hidden');
+                btnDarshan.querySelector('.indicator').classList.add('hidden');
+            }
+        }
+
+        btnDarshan.addEventListener('click', () => switchTab('darshan'));
+        btnPrayers.addEventListener('click', () => switchTab('prayers'));
+
+        // Rituals: Candles
+        function addCandle() {
+            const size = Math.floor(Math.random() * 20) + 30;
+            const candle = document.createElement('div');
+            candle.className = 'mx-2 animate-fade-in';
+            candle.innerHTML = `
+                <div class="relative flex flex-col items-center">
+                    <div class="w-4 h-6 bg-orange-400 rounded-full blur-[1px] animate-flicker origin-bottom shadow-[0_0_20px_rgba(251,146,60,1)]"></div>
+                    <div class="w-5 h-5 bg-amber-300 rounded-full -mt-3 blur-[8px] opacity-70"></div>
+                    <div class="bg-orange-100 w-3 rounded-t-sm shadow-md" style="height: ${size}px"></div>
+                </div>
+            `;
+            candleAltar.appendChild(candle);
+        }
+
+        // Rituals: Flowers
+        function offerFlower() {
+            const colors = ['text-rose-400', 'text-amber-400', 'text-orange-400', 'text-pink-400'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const x = Math.random() * 80 + 10;
+            const y = Math.random() * 40 + 30;
+            const rot = Math.random() * 360;
+
+            const flower = document.createElement('div');
+            flower.className = `absolute animate-float ${color}`;
+            flower.style.left = `${x}%`;
+            flower.style.top = `${y}%`;
+            flower.style.transform = `rotate(${rot}deg)`;
+            flower.innerHTML = `<i data-lucide="flower" style="width:28px; height:28px" fill="currentColor" fill-opacity="0.3"></i>`;
+            
+            flowerContainer.appendChild(flower);
+            lucide.createIcons();
+
+            // Cleanup
+            setTimeout(() => flower.remove(), 4000);
+        }
+
+        // Darshan Interaction
+        btnReceiveDarshan.addEventListener('mouseenter', () => {
+            darshanImg.classList.add('scale-110', 'brightness-110', 'contrast-110');
+            darshanImg.classList.remove('brightness-[0.6]', 'sepia-[0.3]');
+        });
+
+        btnReceiveDarshan.addEventListener('mouseleave', () => {
+            darshanImg.classList.remove('scale-110', 'brightness-110', 'contrast-110');
+            darshanImg.classList.add('brightness-[0.6]', 'sepia-[0.3]');
+        });
+
+        // Prayers
+        btnSendPrayer.addEventListener('click', () => {
+            const text = prayerInput.value.trim();
+            if (!text) return;
+
+            // Show success
+            successOverlay.classList.remove('hidden');
+            
+            // Add to history
+            const historyItem = document.createElement('div');
+            historyItem.className = 'bg-orange-950/10 border-l-4 border-orange-600 p-6 rounded-r-2xl shadow-lg animate-fade-in';
+            historyItem.innerHTML = `
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-[10px] text-orange-500/60 uppercase font-black tracking-widest">${new Date().toLocaleTimeString()}</span>
+                    <i data-lucide="sparkles" class="w-3 h-3 text-orange-500"></i>
+                </div>
+                <p class="text-orange-100/90 leading-relaxed italic text-base">"${text}"</p>
+            `;
+
+            // Remove empty state
+            const empty = prayerHistory.querySelector('.empty-history');
+            if (empty) empty.remove();
+
+            prayerHistory.prepend(historyItem);
+            lucide.createIcons();
+
+            // Reset UI after delay
+            setTimeout(() => {
+                successOverlay.classList.add('hidden');
+                prayerInput.value = '';
+            }, 3000);
+        });
+
+        // Initial Wisdom
+        window.onload = () => {
+            wisdomEl.textContent = `"${wisdoms[Math.floor(Math.random() * wisdoms.length)]}"`;
+            // Add some initial candles
+            for(let i=0; i<3; i++) addCandle();
+        };
+
+    </script>
+</body>
+</html>
